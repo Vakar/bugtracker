@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <app_user id="1" name="Alice"/>
+    <project id="1" title="alice's math project" description="math project" owner_id="1"/>
+    <bug id="1"
+         title="alice's bug"
+         steps_to_reproduce="steps to reproduce"
+         expected_results="expected results"
+         actual_results="actual results"
+         creator_id="1"
+         fixer_id="1"
+         project_id="1"
+         fix_status="NEW"/>
+    <bug_comment id="1"
+                 content="alice comment bug"
+                 creator_id="1"
+                 bug_id="1"/>
+</dataset>

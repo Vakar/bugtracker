@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <app_user id="1" name="Alice"/>
+    <app_user id="2" name="Bob"/>
+    <app_user id="3" name="Carol"/>
+    <project id="1" title="alice's project" description="math project" owner_id="1"/>
+    <bug id="1"
+         title="alice's bug"
+         steps_to_reproduce="steps to reproduce"
+         expected_results="expected results"
+         actual_results="actual results"
+         creator_id="1"
+         project_id="1"
+         fix_status="NEW"/>
+
+    <bug_comment id="1"
+                 content="alice comment bug"
+                 creator_id="1"
+                 bug_id="1"/>
+    <bug_comment id="2"
+                 content="bob comment bug"
+                 creator_id="2"
+                 bug_id="1"/>
+    <bug_comment id="3"
+                 content="carol comment bug"
+                 creator_id="3"
+                 bug_id="1"/>
+</dataset>

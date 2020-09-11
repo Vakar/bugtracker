@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <app_user id="1" name="Alice"/>
+    <app_user id="2" name="Bob"/>
+    <project id="1" title="alice's math project" description="math project" owner_id="1"/>
+</dataset>
