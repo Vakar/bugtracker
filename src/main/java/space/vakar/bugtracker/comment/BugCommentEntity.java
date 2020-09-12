@@ -42,4 +42,12 @@ public @Data class BugCommentEntity implements Serializable {
   @EqualsAndHashCode.Exclude
   @ManyToOne(optional = false)
   private BugEntity bug;
+
+  public static final BugCommentEntity EMPTY =
+      BugCommentEntity.builder()
+          .id(0)
+          .content("")
+          .creator(AppUserEntity.EMPTY)
+          .bug(BugEntity.EMPTY)
+          .build();
 }

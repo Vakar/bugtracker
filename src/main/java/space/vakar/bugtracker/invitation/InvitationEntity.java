@@ -36,4 +36,12 @@ public @Data class InvitationEntity implements Serializable {
   @NotNull
   @Enumerated(EnumType.STRING)
   private Acceptance acceptance;
+
+  public static final InvitationEntity EMPTY =
+      InvitationEntity.builder()
+          .fromUser(AppUserEntity.EMPTY)
+          .toUser(AppUserEntity.EMPTY)
+          .project(ProjectEntity.EMPTY)
+          .acceptance(Acceptance.NEW)
+          .build();
 }
