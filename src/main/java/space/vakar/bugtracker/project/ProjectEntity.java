@@ -1,5 +1,6 @@
 package space.vakar.bugtracker.project;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
 import space.vakar.bugtracker.bug.BugEntity;
 import space.vakar.bugtracker.user.AppUserEntity;
@@ -17,6 +18,7 @@ import java.util.List;
 @Builder(toBuilder = true)
 @NoArgsConstructor
 @AllArgsConstructor
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public @Data class ProjectEntity implements Serializable {
 
   private static final long serialVersionUID = -8298958353983954771L;
@@ -35,11 +37,13 @@ public @Data class ProjectEntity implements Serializable {
   @NotBlank(message = "Description is mandatory")
   private String description;
 
+  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   @ManyToOne(fetch = FetchType.LAZY, optional = false)
   private AppUserEntity owner;
 
+  @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   @OneToMany(orphanRemoval = true, mappedBy = "project")

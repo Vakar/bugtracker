@@ -1,5 +1,6 @@
 package space.vakar.bugtracker.user;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import space.vakar.bugtracker.invitation.InvitationEntity;
 import space.vakar.bugtracker.project.ProjectEntity;
@@ -30,16 +31,19 @@ public @Data class AppUserEntity implements Serializable {
   @NotBlank(message = "User name is mandatory")
   private String name;
 
+  @JsonIgnore
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   @OneToMany(mappedBy = "owner", orphanRemoval = true)
   private List<ProjectEntity> projects;
 
+  @JsonIgnore
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   @OneToMany(mappedBy = "toUser", orphanRemoval = true)
   private List<InvitationEntity> invitationsToUser;
 
+  @JsonIgnore
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   @OneToMany(mappedBy = "fromUser", orphanRemoval = true)

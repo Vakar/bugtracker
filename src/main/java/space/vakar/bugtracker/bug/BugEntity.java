@@ -1,5 +1,6 @@
 package space.vakar.bugtracker.bug;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import space.vakar.bugtracker.comment.BugCommentEntity;
 import space.vakar.bugtracker.project.ProjectEntity;
@@ -50,23 +51,27 @@ public @Data class BugEntity implements Serializable {
   @Enumerated(EnumType.STRING)
   private FixStatus fixStatus;
 
+  @JsonIgnore
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   @JoinColumn(name = "creator_id")
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   private AppUserEntity creator;
 
+  @JsonIgnore
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "fixer_id")
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   private AppUserEntity fixer;
 
+  @JsonIgnore
   @ManyToOne(optional = false, fetch = FetchType.LAZY)
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
   private ProjectEntity project;
 
+  @JsonIgnore
   @OneToMany(orphanRemoval = true, mappedBy = "bug")
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
