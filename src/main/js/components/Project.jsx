@@ -1,7 +1,6 @@
-const React = require('react');
-const {useState} = require('react');
-const {useEffect} = require('react');
-const axios = require('axios');
+import React from "react";
+import {useState, useEffect} from "react";
+import axios from "axios";
 
 function Project() {
 
@@ -20,4 +19,4 @@ function Project() {
     );
 }
 
-module.exports = Project;
+export default Project;
