@@ -5,7 +5,6 @@ export default function BugForm(props) {
   const describeNewBug = useRef(null);
 
   const [bugs, setBugs] = props.bugs;
-  const project = props.project;
 
   const [title, setTitle] = useState("");
   const [expectedResults, setExpectedResults] = useState("");
@@ -13,9 +12,11 @@ export default function BugForm(props) {
   const [stepsToReproduce, setStepsToReproduce] = useState("");
 
   const onSubmit = (event) => {
+    const userId = props.project.owner.id;
+    const projectId = props.project.id;
     axios
       .post(
-        `http://localhost:8080/users/${project.owner.id}/projects/${project.id}/bugs`,
+        `http://localhost:8080/users/${userId}/projects/${projectId}/bugs`,
         {
           title: title,
           expectedResults: expectedResults,
@@ -31,7 +32,7 @@ export default function BugForm(props) {
         setExpectedResults("");
         setActualResults("");
         setStepsToReproduce("");
-      });
+      }).catch(() => console.error("Can't save bug."));
     event.preventDefault();
   };
 

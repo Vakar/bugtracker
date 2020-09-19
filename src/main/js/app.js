@@ -7,17 +7,17 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 import Project from "./components/Project";
 import Container from "./components/Container";
-import Navigation from "./components/Navigation";
-import Home from "./components/Home";
+import Header from "./components/Header";
 import ProjectForm from "./components/ProjectForm";
 import Footer from "./components/Footer";
 
 import { AppContextProvider } from "./context/AppContext";
+import Home from "./components/Home";
 
 const routing = (
   <AppContextProvider>
     <BrowserRouter>
-      <Navigation />
+      <Header />
       <Container>
         <Switch>
           <Route exact path="/" component={Home} />

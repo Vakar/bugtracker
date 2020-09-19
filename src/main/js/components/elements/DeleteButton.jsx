@@ -4,7 +4,7 @@ export default function DeleteButton(props) {
   return (
     <button
       type="button"
-      className="btn btn btn-outline-info float-right"
+      className="btn btn-outline-info border-white btn-sm float-right"
       onClick={props.deleteFn}
     >
       <svg

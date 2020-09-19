@@ -1,6 +1,5 @@
-import DeleteButton from "./bootstrap/DeleteButton";
-
-const React = require("react");
+import React from "react";
+import DeleteButton from "./elements/DeleteButton";
 import axios from "axios";
 
 export default function Bug(props) {
@@ -10,7 +9,8 @@ export default function Bug(props) {
   function deleteBug() {
     axios
       .delete(`http://localhost:8080/users/1/projects/1/bugs/${bug.id}`)
-      .then(() => setBugs(bugs.filter((b) => b.id !== bug.id)));
+      .then(() => setBugs(bugs.filter((b) => b.id !== bug.id)))
+      .catch(() => console.error(`Can't remove bug with id ${bug.id}`));
   }
 
   return (

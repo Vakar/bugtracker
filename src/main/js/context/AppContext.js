@@ -1,38 +1,37 @@
-import * as React from "react";
+import React from "react";
+import { RESET, SET_PROJECTS, SET_USER } from "./actionTypes";
 
-import { RESET, SET_BUGS, SET_PROJECTS, SET_USER } from "./actionTypes";
+const AppContext = React.createContext({});
 
-let AppContext = React.createContext({});
+const DEFAULT_USER = {
+  id: 0,
+  name: "",
+};
+Object.freeze(DEFAULT_USER);
 
-const initialState = {
-  user: {
-    id: 1,
-    name: "Leonid Vakar",
-  },
+const initContext = {
+  user: DEFAULT_USER,
   projects: [],
-  bugs: [],
 };
 
-let reducer = (state, action) => {
+let reducer = (context, action) => {
   switch (action.type) {
     case RESET:
-      return initialState;
+      return initContext;
     case SET_USER:
-      return { ...state, user: action.user };
+      return { ...context, user: action.user };
     case SET_PROJECTS:
-      return { ...state, projects: action.projects };
-    case SET_BUGS:
-      return { ...state, bugs: action.bugs };
+      return { ...context, projects: action.projects };
   }
 };
 
 function AppContextProvider(props) {
-  let [state, dispatch] = React.useReducer(reducer, initialState);
+  let [context, dispatch] = React.useReducer(reducer, initContext);
   return (
-    <AppContext.Provider value={{ state, dispatch }}>
+    <AppContext.Provider value={{ context, dispatch }}>
       {props.children}
     </AppContext.Provider>
   );
 }
 
-export { AppContext, AppContextProvider };
+export { AppContext, AppContextProvider, DEFAULT_USER };

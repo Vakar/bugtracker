@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Bug from "./Bug";
 
 export default function BugList(props) {
-  const [bugs, setBugs] = props.bugs;
+  const [bugs, ] = props.bugs;
   const [bugList, setBugList] = useState([]);
 
   useEffect(() => {

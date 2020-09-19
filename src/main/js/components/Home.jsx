@@ -1,18 +1,9 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useContext } from "react";
+import { AppContext } from "../context/AppContext";
+import Login from "./Login";
+import WellCome from "./WellCome";
 
 export default function Home() {
-  return (
-    <div className="container">
-      <div className="row">
-        <div className="col-lg-12 text-center">
-          <h1 className="mt-5">Welcome to Bugtracker</h1>
-          <p className="lead">Please select the project or create new one!</p>
-          <Link role="button" className="btn btn-success" to="/addProject">
-            Create new project
-          </Link>
-        </div>
-      </div>
-    </div>
-  );
+  const { context } = useContext(AppContext);
+  return context.user.id === 0 ? <Login /> : <WellCome />;
 }

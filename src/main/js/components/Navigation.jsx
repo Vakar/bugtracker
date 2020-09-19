@@ -1,29 +1,31 @@
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
-
 import { AppContext } from "../context/AppContext";
-import { setProjects } from "../context/actions";
+import axios from "axios";
+import { setContextProjects} from "../context/actions";
 
-export default function Navigation() {
-  const { state, dispatch } = useContext(AppContext);
+export default function Navigation(props) {
+  const { context, dispatch } = useContext(AppContext);
+  const [projects, setProjects] = useState([]);
+
+  // When context user changes, gets user projects and save them to context.
+  useEffect(() => {
+    if (context.user.id !== 0) {
+      axios
+        .get(`/users/${context.user.id}/projects`)
+        .then((res) => dispatch(setContextProjects(res.data))).catch(() => console.error("Can't get list of projects!"));
+    }
+  }, [context.user]);
 
   useEffect(() => {
-    axios
-      .get(`/users/${state.user.id}/projects`)
-      .then((res) => dispatch(setProjects(res.data)));
-  }, [state.user.id, state.projects]);
+    setProjects(context.projects);
+  }, [context.projects]);
 
-  return (
-    <nav className="navbar navbar-expand-lg navbar-dark bg-dark static-top">
-      <div className="container">
-        <img
-          src="https://avatars0.githubusercontent.com/u/12372533?v=4"
-          alt="avatar"
-          style={{ height: "36px" }}
-          className="rounded-circle"
-        />
-        <span className="navbar-brand ml-2">{state.user.name}</span>
+  if (props.user.id === 0) {
+    return null;
+  } else {
+    return (
+      <React.Fragment>
         <button
           className="navbar-toggler"
           type="button"
@@ -52,13 +54,13 @@ export default function Navigation() {
                 aria-haspopup="true"
                 aria-expanded="false"
               >
-                Projects{" "}
-                <span className="badge badge-light">
-                  {state.projects.length}
+                Projects
+                <span className="badge badge-light ml-1">
+                  {projects.length}
                 </span>
               </a>
               <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                {state.projects.map((p, index) => {
+                {projects.map((p, index) => {
                   return (
                     <Link
                       key={index}
@@ -73,7 +75,7 @@ export default function Navigation() {
             </li>
           </ul>
         </div>
-      </div>
-    </nav>
-  );
+      </React.Fragment>
+    );
+  }
 }

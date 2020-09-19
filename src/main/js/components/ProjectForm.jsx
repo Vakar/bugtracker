@@ -4,24 +4,24 @@ import { AppContext } from "../context/AppContext";
 import { useHistory } from "react-router-dom";
 
 import axios from "axios";
-import { setProjects } from "../context/actions";
+import { setContextProjects } from "../context/actions";
 
 export default function ProjectForm() {
   const history = useHistory();
-  const { state, dispatch } = useContext(AppContext);
+  const { context, dispatch } = useContext(AppContext);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
   const onSubmit = (e) => {
     axios
-      .post(`http://localhost:8080/users/${state.user.id}/projects`, {
+      .post(`http://localhost:8080/users/${context.user.id}/projects`, {
         title: title,
         description: description,
       })
       .then((res) => {
-        dispatch(setProjects([...state.projects, res.data]));
+        dispatch(setContextProjects([...context.projects, res.data]));
         history.push(`/project/${res.data.id}`);
-      });
+      }).catch(() => console.error("Can't save project!"));
     e.preventDefault();
   };
 
