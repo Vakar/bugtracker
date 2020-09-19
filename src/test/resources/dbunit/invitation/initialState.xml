@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <app_user id="1" name="Alice"/>
-    <app_user id="2" name="Bob"/>
-    <app_user id="3" name="Carol"/>
+    <app_user id="1"  name="Alice" facebook_id="1111111111111111"/>
+    <app_user id="2" name="Bob" facebook_id="2222222222222222"/>
+    <app_user id="3" name="Carol" facebook_id="3333333333333333"/>
     <project id="1" title="alice's math project" description="math project" owner_id="1"/>
     <project id="2" title="bob's physics project" description="physics project" owner_id="2"/>
     <invitation from_user_id="1" to_user_id="2" project_id="1" acceptance="NEW"/>

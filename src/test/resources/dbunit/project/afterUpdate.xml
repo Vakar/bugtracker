@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <app_user id="1" name="Alice"/>
-    <app_user id="2" name="Bob"/>
+    <app_user id="1" name="Alice" facebook_id="1111111111111111"/>
+    <app_user id="2" name="Bob" facebook_id="2222222222222222"/>
     <project id="1" title="alice's math project" description="math project" owner_id="1"/>
     <project id="2" title="bob's literature project" description="literature project" owner_id="2"/>
 </dataset>

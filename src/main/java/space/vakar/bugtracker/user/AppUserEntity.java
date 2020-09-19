@@ -31,6 +31,9 @@ public @Data class AppUserEntity implements Serializable {
   @NotBlank(message = "User name is mandatory")
   private String name;
 
+  @NotNull
+  private long facebookId;
+
   @JsonIgnore
   @ToString.Exclude
   @EqualsAndHashCode.Exclude
@@ -53,6 +56,7 @@ public @Data class AppUserEntity implements Serializable {
       AppUserEntity.builder()
           .id(0)
           .name("")
+          .facebookId(0L)
           .projects(Collections.emptyList())
           .invitationsToUser(Collections.emptyList())
           .invitationsFromUser(Collections.emptyList())

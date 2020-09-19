@@ -1,4 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
-    <app_user id="2" name="Bob"/>
+    <app_user id="2" name="Bob" facebook_id="2222222222222222"/>
 </dataset>
