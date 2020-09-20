@@ -12,3 +12,6 @@ target/
 
 ### Hide application properties files
 /src/main/resources/application.properties
+
+### Hide frontend built folder
+/src/main/resources/static/built/**
