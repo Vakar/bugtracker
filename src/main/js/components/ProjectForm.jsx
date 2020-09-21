@@ -3,7 +3,8 @@ import React, { useContext, useState } from "react";
 import { AppContext } from "../context/AppContext";
 import { useHistory } from "react-router-dom";
 
-import axios from "axios";
+import { projectsSave } from "../restClient";
+import { routeProjectWithId } from "../reactRouts";
 import { setContextProjects } from "../context/actions";
 
 export default function ProjectForm() {
@@ -13,17 +14,18 @@ export default function ProjectForm() {
   const [description, setDescription] = useState("");
 
   const onSubmit = (e) => {
-    axios
-      .post(`http://localhost:8080/users/${context.user.id}/projects`, {
-        title: title,
-        description: description,
-      })
-      .then((res) => {
-        dispatch(setContextProjects([...context.projects, res.data]));
-        history.push(`/project/${res.data.id}`);
-      }).catch(() => console.error("Can't save project!"));
+    const project = {
+      title: title,
+      description: description,
+    };
+    projectsSave(context.user.id, project, saveProjectCallback);
     e.preventDefault();
   };
+
+  function saveProjectCallback(project) {
+    dispatch(setContextProjects([...context.projects, project]));
+    history.push(routeProjectWithId(project.id));
+  }
 
   return (
     <React.Fragment>

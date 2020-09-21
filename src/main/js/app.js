@@ -4,6 +4,7 @@ import "bootstrap/dist/js/bootstrap.js";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
+import {ROUTE_HOME,ROUTE_PROJECT, ROUTE_CREATE_PROJECT_FORM} from "./reactRouts";
 
 import Project from "./components/Project";
 import Container from "./components/Container";
@@ -20,9 +21,9 @@ const routing = (
       <Header />
       <Container>
         <Switch>
-          <Route exact path="/" component={Home} />
-          <Route exact path="/project/:handle" component={Project} />
-          <Route exact path="/addProject" component={ProjectForm} />
+          <Route exact path={ROUTE_HOME} component={Home} />
+          <Route exact path={`${ROUTE_PROJECT}:handle`} component={Project} />
+          <Route exact path={ROUTE_CREATE_PROJECT_FORM} component={ProjectForm} />
         </Switch>
       </Container>
       <Footer />

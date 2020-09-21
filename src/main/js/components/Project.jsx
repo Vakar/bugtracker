@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-import axios from "axios";
 import BugForm from "./BugForm";
 import BugList from "./BugList";
+
+import { ROUTE_HOME } from "../reactRouts";
+import { projectsDelete, projectsFind } from "../restClient";
 
 import { AppContext } from "../context/AppContext";
 import { setContextProjects } from "../context/actions";
@@ -14,25 +16,23 @@ export default function Project(props) {
   const [bugs, setBugs] = useState([]);
   const { handle } = props.match.params;
 
-  useEffect(() => {
-    axios
-      .get(`../users/1/projects/${handle}`)
-      .then((res) => {
-        setProject(res.data);
-        setBugs(res.data.bugs);
-      })
-      .catch(() =>
-        console.error(`Can't get information about project with id ${handle}`)
-      );
-  }, [props.match.params.handle]);
+  useEffect(() => projectsFind(context.user.id, handle, projectGetCallback), [
+    props.match.params.handle,
+  ]);
 
-  const deleteProject = () => {
-    axios.delete(`../users/1/projects/${handle}`).then(() => {
-      const filtered = context.projects.filter((p) => p.id !== Number(handle));
-      dispatch(setContextProjects([...filtered]));
-      props.history.push("/");
-    });
-  };
+  function projectGetCallback(proj) {
+    setProject(proj);
+    setBugs(proj.bugs);
+  }
+
+  const deleteProject = () =>
+    projectsDelete(context.user.id, handle, projectDeleteCallback);
+
+  function projectDeleteCallback() {
+    const filtered = context.projects.filter((p) => p.id !== Number(handle));
+    dispatch(setContextProjects([...filtered]));
+    props.history.push(ROUTE_HOME);
+  }
 
   return !project ? (
     <section about="project data" />
@@ -41,8 +41,17 @@ export default function Project(props) {
       <DeleteButton deleteFn={deleteProject} />
       <h1 className="card-title mt-4">{project.title}</h1>
       <p>{project.description}</p>
-      <BugForm project={project} bugs={[bugs, setBugs]} />
-      <BugList bugs={[bugs, setBugs]} />
+      {/*  todo: DRY same properties*/}
+      <BugForm
+        bugs={[bugs, setBugs]}
+        userId={context.user.id}
+        projectId={handle}
+      />
+      <BugList
+        bugs={[bugs, setBugs]}
+        userId={context.user.id}
+        projectId={handle}
+      />
     </section>
   );
 }

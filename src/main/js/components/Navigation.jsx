@@ -1,25 +1,16 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { AppContext } from "../context/AppContext";
-import axios from "axios";
-import { setContextProjects} from "../context/actions";
+import { setContextProjects } from "../context/actions";
+import { projectsFindAll } from "../restClient";
 
 export default function Navigation(props) {
   const { context, dispatch } = useContext(AppContext);
   const [projects, setProjects] = useState([]);
 
-  // When context user changes, gets user projects and save them to context.
-  useEffect(() => {
-    if (context.user.id !== 0) {
-      axios
-        .get(`/users/${context.user.id}/projects`)
-        .then((res) => dispatch(setContextProjects(res.data))).catch(() => console.error("Can't get list of projects!"));
-    }
-  }, [context.user]);
-
-  useEffect(() => {
-    setProjects(context.projects);
-  }, [context.projects]);
+  useEffect(() => projectsFindAll(context.user.id, callback), [context.user]);
+  const callback = (data) => dispatch(setContextProjects(data));
+  useEffect(() => setProjects(context.projects), [context.projects]);
 
   if (props.user.id === 0) {
     return null;

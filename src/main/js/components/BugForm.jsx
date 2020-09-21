@@ -1,9 +1,10 @@
 import React, { useRef, useState } from "react";
-import axios from "axios";
+import { bugsSave } from "../restClient";
 
 export default function BugForm(props) {
-  const describeNewBug = useRef(null);
+  const describeNewBugButton = useRef(null);
 
+  const { projectId, userId } = props;
   const [bugs, setBugs] = props.bugs;
 
   const [title, setTitle] = useState("");
@@ -12,29 +13,33 @@ export default function BugForm(props) {
   const [stepsToReproduce, setStepsToReproduce] = useState("");
 
   const onSubmit = (event) => {
-    const userId = props.project.owner.id;
-    const projectId = props.project.id;
-    axios
-      .post(
-        `http://localhost:8080/users/${userId}/projects/${projectId}/bugs`,
-        {
-          title: title,
-          expectedResults: expectedResults,
-          actualResults: actualResults,
-          stepsToReproduce: stepsToReproduce,
-          fixStatus: "NEW",
-        }
-      )
-      .then((res) => {
-        setBugs([...bugs, res.data]);
-        describeNewBug.current.click();
-        setTitle("");
-        setExpectedResults("");
-        setActualResults("");
-        setStepsToReproduce("");
-      }).catch(() => console.error("Can't save bug."));
+    const bug = {
+      title: title,
+      expectedResults: expectedResults,
+      actualResults: actualResults,
+      stepsToReproduce: stepsToReproduce,
+      fixStatus: "NEW",
+    };
+    bugsSave(userId, projectId, bug, bugSaveCallback);
     event.preventDefault();
   };
+
+  function bugSaveCallback(bug) {
+    setBugs([...bugs, bug]);
+    clickDescribeNewBugButton();
+    cleanForm();
+  }
+
+  function clickDescribeNewBugButton() {
+    describeNewBugButton.current.click();
+  }
+
+  function cleanForm() {
+    setTitle("");
+    setExpectedResults("");
+    setActualResults("");
+    setStepsToReproduce("");
+  }
 
   return (
     <React.Fragment>
@@ -54,7 +59,7 @@ export default function BugForm(props) {
             <button
               type="button"
               className="btn btn-success"
-              ref={describeNewBug}
+              ref={describeNewBugButton}
               data-toggle="collapse"
               data-target="#describeNewBugFrom"
               aria-expanded="true"

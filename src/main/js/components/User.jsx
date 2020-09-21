@@ -1,18 +1,21 @@
 import React, { useContext } from "react";
 import { useHistory } from "react-router-dom";
 import { AppContext, DEFAULT_USER } from "../context/AppContext";
-import axios from "axios";
 import { setContextUser } from "../context/actions";
+import { ROUTE_HOME } from "../reactRouts";
+import { logout } from "../restClient";
 
 export default function User(props) {
   const history = useHistory();
   const { dispatch } = useContext(AppContext);
 
   function handleLogout() {
-    axios.post("http://localhost:8080/logout").then(() => {
-      dispatch(setContextUser(DEFAULT_USER));
-      history.push("/");
-    }).catch(() => console.error("Can't logout properly!"));
+    logout(callback);
+  }
+
+  function callback() {
+    dispatch(setContextUser(DEFAULT_USER));
+    history.push(ROUTE_HOME);
   }
 
   return props.user.id === 0 ? (
