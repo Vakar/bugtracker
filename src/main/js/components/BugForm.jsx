@@ -3,14 +3,13 @@ import { bugsSave } from "../restClient";
 
 export default function BugForm(props) {
   const describeNewBugButton = useRef(null);
-
-  const { projectId, userId } = props;
-  const [bugs, setBugs] = props.bugs;
-
   const [title, setTitle] = useState("");
   const [expectedResults, setExpectedResults] = useState("");
   const [actualResults, setActualResults] = useState("");
   const [stepsToReproduce, setStepsToReproduce] = useState("");
+
+  const { projectId, userId } = props;
+  const [bugs, setBugs] = props.bugs;
 
   const onSubmit = (event) => {
     const bug = {
