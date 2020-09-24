@@ -34,7 +34,10 @@ function projectsFindAll(userId, callback) {
     axios
       .get(`/users/${userId}/projects`)
       .then((res) => callback(res.data))
-      .catch(() => console.error("Can't get list of projects!"));
+      .catch(() => {
+        console.error("Can't get list of projects!");
+        window.location = "/";
+      });
   }
 }
 
@@ -42,35 +45,50 @@ function projectsFind(userId, projectId, callback) {
   axios
     .get(`${pathProjects(userId)}/${projectId}`)
     .then((res) => callback(res.data))
-    .catch(() => console.error("Can't get information about project."));
+    .catch(() => {
+      console.error("Can't get information about project.");
+      window.location = "/";
+    });
 }
 
 function projectsSave(userId, project, callback) {
   axios
     .post(`${pathProjects(userId)}`, project)
     .then((res) => callback(res.data))
-    .catch(() => console.error("Can't save project!"));
+    .catch(() => {
+      console.error("Can't save project!");
+      window.location = "/";
+    });
 }
 
 function projectsDelete(userId, projectId, callback) {
   axios
     .delete(`${pathProjects(userId)}/${projectId}`)
     .then(() => callback())
-    .catch(() => console.error("Can't delete project."));
+    .catch(() => {
+      console.error("Can't delete project.");
+      window.location = "/";
+    });
 }
 
 function bugsSave(userId, projectId, bug, callback) {
   axios
     .post(`${pathBugs(userId, projectId)}`, bug)
     .then((res) => callback(res.data))
-    .catch(() => console.error("Can't save bug."));
+    .catch(() => {
+      console.error("Can't save bug.");
+      window.location = "/";
+    });
 }
 
 function bugsDelete(userId, projectId, bugId, callback) {
   axios
     .delete(`${pathBugs(userId, projectId)}/${bugId}`)
     .then(callback(bugId))
-    .catch(() => console.error(`Can't remove bug`));
+    .catch(() => {
+      console.error(`Can't remove bug`);
+      window.location = "/";
+    });
 }
 
 export {

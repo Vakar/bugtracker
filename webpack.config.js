@@ -2,7 +2,7 @@ let path = require("path");
 
 module.exports = {
   entry: "./src/main/js/app.js",
-  // devtool: "sourcemaps",
+  devtool: "sourcemaps",
   cache: true,
   mode: "development",
   output: {
@@ -41,7 +41,7 @@ module.exports = {
       maxAsyncRequests: 10,
       cacheGroups: {
         vendors: {
-          test: /[\\/]node_modules[\\/](react|react-dom|bootstrap)[\\/]/,
+          test: /[\\/]node_modules[\\/](react|react-dom|bootstrap|reactstrap)[\\/]/,
           name(module, chunks, cacheGroupKey) {
             const packageName = module.context.match(
               /[\\/]node_modules[\\/](.*?)([\\/]|$)/
