@@ -34,7 +34,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Autowired private AppUserRepository userRepository;
 
-  @GetMapping("/user")
+  @GetMapping("/rest/user")
   public AppUserEntity user(@AuthenticationPrincipal OAuth2User auth2User) {
     String facebookIdStr = Objects.requireNonNull(auth2User.getAttribute(FACEBOOK_ID));
     long facebookIdLong = Long.parseLong(facebookIdStr);
@@ -49,19 +49,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
   @Override
   protected void configure(HttpSecurity http) throws Exception {
-    http.authorizeRequests(
-            a ->
-                a.antMatchers(
-                        "/",
-                        "/error",
-                        "/css/**",
-                        "/img/**",
-                        "/built/**",
-                        "/project/",
-                        "/addProject")
-                    .permitAll()
-                    .anyRequest()
-                    .authenticated())
+    http.authorizeRequests(a -> a.antMatchers("/rest/**").authenticated())
         .logout(l -> l.logoutSuccessUrl("/").permitAll())
         .exceptionHandling(
             e -> e.authenticationEntryPoint(new HttpStatusEntryPoint(HttpStatus.UNAUTHORIZED)))

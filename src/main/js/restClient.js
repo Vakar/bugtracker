@@ -4,7 +4,7 @@ import axios from "axios";
 const root = () => window.location.origin.toString();
 
 /** SERVER AUTHORIZED USER API STARTS **/
-const PATH_USER = `${root()}/user`;
+const PATH_USER = `${root()}/rest/user`;
 const PATH_LOGOUT = `${root()}/logout`;
 
 function authorizedUser(callback) {
@@ -24,7 +24,7 @@ function logout(callback) {
 /** SERVER AUTHORIZED USER API ENDS **/
 
 /** SERVER REST API STARTS **/
-const PATH_USERS = `${root()}/users`;
+const PATH_USERS = `${root()}/rest/users`;
 const pathProjects = (userId) => `${PATH_USERS}/${userId}/projects`;
 const pathBugs = (userId, projectId) =>
   `${pathProjects(userId)}/${projectId}/bugs`;
@@ -32,7 +32,7 @@ const pathBugs = (userId, projectId) =>
 function projectsFindAll(userId, callback) {
   if (userId > 0) {
     axios
-      .get(`/users/${userId}/projects`)
+      .get(pathProjects(userId))
       .then((res) => callback(res.data))
       .catch(() => {
         console.error("Can't get list of projects!");

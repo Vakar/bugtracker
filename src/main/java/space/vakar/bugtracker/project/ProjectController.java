@@ -8,7 +8,7 @@ import space.vakar.bugtracker.user.AppUserRepository;
 import java.util.List;
 
 @RestController
-@RequestMapping("/users/{userId}/**")
+@RequestMapping("/rest/users/{userId}/**")
 public class ProjectController {
 
   private final AppUserRepository userRepository;
