@@ -7,10 +7,10 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 import {ROUTE_HOME,ROUTE_PROJECT, ROUTE_CREATE_PROJECT_FORM} from "./reactRouts";
 
 import Project from "./components/Project";
-import Container from "./components/Container";
-import Header from "./components/Header";
+import Container from "./components/commons/Container";
+import Header from "./components/commons/Header";
 import ProjectForm from "./components/ProjectForm";
-import Footer from "./components/Footer";
+import Footer from "./components/commons/Footer";
 
 import { AppContextProvider } from "./context/AppContext";
 import Home from "./components/Home";
