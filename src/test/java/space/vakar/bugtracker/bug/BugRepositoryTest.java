@@ -72,7 +72,7 @@ class BugRepositoryTest {
       value = "classpath:dbunit/bug/afterUpdate.xml",
       assertionMode = DatabaseAssertionMode.NON_STRICT_UNORDERED)
   void update() {
-    bobBug.setFixStatus(FixStatus.FIXED);
+    bobBug.setFixStatus(FixStatus.CLOSED);
     repository.saveAndFlush(bobBug);
   }
 

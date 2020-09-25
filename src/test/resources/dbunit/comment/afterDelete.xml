@@ -11,7 +11,7 @@
          actual_results="actual results"
          creator_id="1"
          project_id="1"
-         fix_status="NEW"/>
+         fix_status="OPEN"/>
 
     <bug_comment id="1"
                  content="alice comment bug"

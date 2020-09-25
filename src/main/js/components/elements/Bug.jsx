@@ -37,9 +37,11 @@ export default function Bug(props) {
 
     const getNextStatus = (status) => {
         const nextState = new Map();
-        nextState.set("NEW", "IN_WORK");
-        nextState.set("IN_WORK", "FIXED");
-        nextState.set("FIXED", "NEW");
+        nextState.set("OPEN", "ASSIGN");
+        nextState.set("ASSIGN", "TEST");
+        nextState.set("TEST", "CLOSED");
+        nextState.set("CLOSED", "REOPEN");
+        nextState.set("REOPEN", "ASSIGN");
         return nextState.get(status);
     };
     /* UPDATE BUG END */

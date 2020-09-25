@@ -84,7 +84,7 @@ public @Data class BugEntity implements Serializable {
           .stepsToReproduce("")
           .expectedResults("")
           .actualResults("")
-          .fixStatus(FixStatus.NEW)
+          .fixStatus(FixStatus.OPEN)
           .creator(AppUserEntity.EMPTY)
           .fixer(AppUserEntity.EMPTY)
           .project(ProjectEntity.EMPTY)

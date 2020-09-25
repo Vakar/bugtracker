@@ -11,7 +11,7 @@
          creator_id="1"
          fixer_id="2"
          project_id="1"
-         fix_status="NEW"/>
+         fix_status="OPEN"/>
     <bug id="2"
          title="bob's bug"
          steps_to_reproduce="steps to reproduce"
@@ -20,5 +20,5 @@
          creator_id="2"
          fixer_id="1"
          project_id="1"
-         fix_status="FIXED"/>
+         fix_status="CLOSED"/>
 </dataset>

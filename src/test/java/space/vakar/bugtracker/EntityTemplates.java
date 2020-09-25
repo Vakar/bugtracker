@@ -55,7 +55,7 @@ public class EntityTemplates {
           .fixer(BOB)
           .project(ALICE_PROJECT)
           .comments(Collections.emptyList())
-          .fixStatus(FixStatus.NEW)
+          .fixStatus(FixStatus.OPEN)
           .build();
   public static final BugEntity BOB_BUG =
       BugEntity.builder()
@@ -68,7 +68,7 @@ public class EntityTemplates {
           .fixer(ALICE)
           .project(ALICE_PROJECT)
           .comments(Collections.emptyList())
-          .fixStatus(FixStatus.IN_WORK)
+          .fixStatus(FixStatus.ASSIGN)
           .build();
   public static final BugEntity NEW_BUG =
       BugEntity.builder()
@@ -81,7 +81,7 @@ public class EntityTemplates {
           .fixer(ALICE)
           .project(ALICE_PROJECT)
           .comments(Collections.emptyList())
-          .fixStatus(FixStatus.NEW)
+          .fixStatus(FixStatus.OPEN)
           .build();
 
   public static final BugCommentEntity ALICE_COMMENT =
