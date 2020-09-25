@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {bugsDelete} from "../../restClient";
+import {bugsDelete, bugUpdate} from "../../restClient";
 import {
     Badge,
     Button,
@@ -13,10 +13,36 @@ import {
 
 export default function Bug(props) {
     const [bugs, setBugs] = props.bugs;
-    const {bug, userId, projectId} = props;
+    const {userId, projectId} = props;
+    const [bug, setBug] = useState(props.bug);
 
-    const deleteBug = () => bugsDelete(userId, projectId, bug.id, callback);
-    const callback = () => setBugs(bugs.filter((b) => b.id !== bug.id));
+    /* DELETE BUG START */
+    const deleteBug = () =>
+        bugsDelete(userId, projectId, bug.id, deleteBugCallback);
+
+    const deleteBugCallback = () => setBugs(bugs.filter((b) => b.id !== bug.id));
+    /* DELETE BUG END */
+
+    /* UPDATE BUG START */
+    const updateBugStatus = () => {
+        const status = bug.fixStatus;
+        bug.fixStatus = getNextStatus(status);
+        bugUpdate(userId, projectId, bug, updateBugCallback);
+    };
+
+    const updateBugCallback = (updatedBug) => {
+        setBugs(bugs.map((b) => (b.id === updatedBug.id ? updatedBug : b)));
+        setBug(updatedBug);
+    };
+
+    const getNextStatus = (status) => {
+        const nextState = new Map();
+        nextState.set("NEW", "IN_WORK");
+        nextState.set("IN_WORK", "FIXED");
+        nextState.set("FIXED", "NEW");
+        return nextState.get(status);
+    };
+    /* UPDATE BUG END */
 
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
@@ -49,6 +75,9 @@ export default function Bug(props) {
                         </CardText>
                         <ButtonGroup size="sm" className="float-right">
                             <Button onClick={deleteBug}>Delete</Button>
+                            <Button onClick={updateBugStatus}>
+                                {getNextStatus(bug.fixStatus)}
+                            </Button>
                         </ButtonGroup>
                     </CardBody>
                 </Card>

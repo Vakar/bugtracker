@@ -81,6 +81,16 @@ function bugsSave(userId, projectId, bug, callback) {
     });
 }
 
+function bugUpdate(userId, projectId, bug, callback) {
+  axios
+    .put(`${pathBugs(userId, projectId)}`, bug)
+    .then((res) => callback(res.data))
+    .catch(() => {
+      console.error("Can't save bug.");
+      window.location = "/";
+    });
+}
+
 function bugsDelete(userId, projectId, bugId, callback) {
   axios
     .delete(`${pathBugs(userId, projectId)}/${bugId}`)
@@ -99,5 +109,6 @@ export {
   projectsSave,
   projectsDelete,
   bugsSave,
+  bugUpdate,
   bugsDelete,
 };
