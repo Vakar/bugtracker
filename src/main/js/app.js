@@ -6,9 +6,10 @@ import {
   ROUTE_CREATE_PROJECT_FORM,
   ROUTE_HOME,
   ROUTE_PRIVACY,
-  ROUTE_PROJECT
+  ROUTE_PROJECT,
 } from "./reactRouts";
 
+import AcceptCookies from "./components/commons/AcceptCookies";
 import { AppContextProvider } from "./context/AppContext";
 import Container from "./components/commons/Container";
 import Footer from "./components/commons/Footer";
@@ -24,6 +25,7 @@ import ReactDOM from "react-dom";
 const routing = (
   <AppContextProvider>
     <BrowserRouter>
+      <AcceptCookies />
       <Header />
       <Container>
         <Switch>
@@ -34,7 +36,7 @@ const routing = (
             path={ROUTE_CREATE_PROJECT_FORM}
             component={ProjectForm}
           />
-          <Route exact path={ROUTE_PRIVACY} component={Privacy}/>
+          <Route exact path={ROUTE_PRIVACY} component={Privacy} />
           <Route component={PageNotFound} />
         </Switch>
       </Container>
