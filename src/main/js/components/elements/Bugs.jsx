@@ -1,5 +1,3 @@
-import React, { useState } from "react";
-import { bugsSave } from "../../restClient";
 import {
   Badge,
   Button,
@@ -11,7 +9,10 @@ import {
   ListGroup,
   ListGroupItem,
 } from "reactstrap";
+import React, { useState } from "react";
+
 import Bug from "./Bug";
+import { bugsSave } from "../../restClient";
 
 export default function Bugs(props) {
   const [title, setTitle] = useState("");
@@ -31,7 +32,7 @@ export default function Bugs(props) {
       expectedResults: expectedResults,
       actualResults: actualResults,
       stepsToReproduce: stepsToReproduce,
-      fixStatus: "NEW",
+      fixStatus: "OPEN",
     };
     bugsSave(userId, projectId, bug, bugSaveCallback);
     event.preventDefault();
