@@ -11,11 +11,6 @@ public class HomeController {
     return "index";
   }
 
-  @GetMapping("/privacy")
-  public String privacy() {
-    return "privacy";
-  }
-
   @GetMapping("/**/{path:[^.]*}")
   public String forward() {
     return "forward:/";
