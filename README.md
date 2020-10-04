@@ -18,7 +18,7 @@ You can download and unzip project or clone repository
 
 ### Setting up application.properties
 
-You need to specify values inside curly brackets. Application use hibernate as ORM. Also be sure you register app at [facebook for developers](https://developers.facebook.com/) and get app id and secret. 
+You need to specify values inside curly brackets. Application use hibernate as ORM. Also be sure you register app at [facebook for developers](https://developers.facebook.com/) and get app id and secret. Please config your database to support utf-8 unicode encoding.
 
 ```bash
 
@@ -33,6 +33,10 @@ spring.datasource.username={your-username}
 spring.datasource.password={your-password}
 # Json serialization settings
 spring.jackson.serialization.fail-on-empty-beans=false
+# HTTP encoding 
+server.servlet.encoding.charset=UTF-8
+server.servlet.encoding.enabled=true
+server.servlet.encoding.force=true
 # OAuth2 facebook authorization
 spring.security.oauth2.client.registration.facebook.client-id={facebook-app-id}
 spring.security.oauth2.client.registration.facebook.client-secret={facebook-secret}
